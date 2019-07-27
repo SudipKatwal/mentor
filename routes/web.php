@@ -18,11 +18,12 @@ Route::group(
     ],
     function(){
         Route::get('/','FrontController@index')->name('home');
+        Route::get('/home','FrontController@index')->name('home');
         Route::get('profile/{slug}','FrontController@profile')->name('profile');
-        Route::resource('features','FeaturesController');
-        Route::post('feature-data','FeaturesController@featuresData')->name('features.data');
-        Route::resource('about','AboutController');
-        Route::resource('courses','FeaturesController');
+        Route::resource('features','FeaturesController')->middleware('auth');
+        Route::post('feature-data','FeaturesController@featuresData')->middleware('auth')->name('features.data');
+        Route::resource('about','AboutController')->middleware('auth');
+        Route::resource('courses','FeaturesController')->middleware('auth');
     }
 );
 Auth::routes();

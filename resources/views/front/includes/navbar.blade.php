@@ -18,6 +18,7 @@
           <li><a href="#testimonial">Testimonial</a></li>
           @guest
             <li><a href="{{route('login')}}">Sign in</a></li>
+            <li><a href="{{route('register')}}">Register</a></li>
           @endguest
           @auth
           <li class="dropdown">
