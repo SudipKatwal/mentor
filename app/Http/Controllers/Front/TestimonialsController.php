@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Front;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
-use App\Feature;
+use App\Testimonial;
 use DataTables;
 use Session;
 
-class FeaturesController extends Controller
+class TestimonialsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,27 +18,23 @@ class FeaturesController extends Controller
      */
     public function index()
     {
-        return view('front.pages.features.features');
+        return view('front.pages.testimonials.testimonials');
     }
 
-    public function featuresData(Request $request)
+    public function testimonialsData(Request $request)
     {
-        $data = Feature::where('user_id',auth()->user()->id)->latest()->get();
+        $data = Testimonial::where('user_id',auth()->user()->id)->latest()->get();
             
             return Datatables::of($data)
                 ->addIndexColumn()
-                ->addColumn('title', function($row){
+                ->addColumn('name', function($row){
                     return $row->name;
                 })
                 ->addColumn('descriptions', function($row){
                     return $row->descriptions;
                 })
-                
-                ->addColumn('type', function($row){
-                    return $row->type;
-                })
                 ->addColumn('edit', function($row){
-                    $url = route('features.edit',$row->id);
+                    $url = route('testimonials.edit',$row->id);
                     return '<a href="'.$url.'" class="edit btn btn-primary btn-sm editProduct">Edit</a>';
                 })
                 ->addColumn('delete', function($row){
@@ -55,7 +51,7 @@ class FeaturesController extends Controller
      */
     public function create()
     {
-        return view('front.pages.features.add-features');        
+        return view('front.pages.testimonials.add-testimonials');        
     }
 
     /**
@@ -74,7 +70,6 @@ class FeaturesController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:191',
             'editor1' => 'required|string|max:1000',
-            'type'  => 'required|string|in:course,feature',
         ],$messages);
 
         if ($validator->fails()) {
@@ -83,27 +78,26 @@ class FeaturesController extends Controller
                         ->withInput();
         }
 
-        $featureJSON = [
+        $testimonialsJSON = [
             'name'  => $request->name,
             'descriptions'   => $request->editor1,
             'user_id'   => auth()->user()->id,
-            'type'      => $request->type,
         ];
         
         if($request->_id){
-            $feature = Feature::find($request->_id);
+            $testimonial = Testimonial::find($request->_id);
             
-            if($feature->update($featureJSON)){
+            if($testimonial->update($featureJSON)){
                 Session::flash('success', $feature->name.' has been updated.');
-                return redirect()->route('features.index');
+                return redirect()->route('testimonials.index');
             }
             Session::flash('error','Something went wrong. Please try again.');
             return redirect()->back();
 
         } else {
-            if(Feature::create($featureJSON)){
-                Session::flash('success','New Feature has been added.');
-                return redirect()->route('features.index');
+            if(Testimonial::create($testimonialsJSON)){
+                Session::flash('success','New testimonial has been added.');
+                return redirect()->route('testimonials.index');
             }
             Session::flash('error','Something went wrong. Please try again.');
             return redirect()->back();
@@ -129,9 +123,9 @@ class FeaturesController extends Controller
      */
     public function edit($id)
     {
-        return view('front.pages.features.add-features',
+        return view('front.pages.testimonials.add-testimonials',
             [
-                'detail'    => Feature::find($id),
+                'detail'    => Testimonial::find($id),
             ]
         );
     }
@@ -156,7 +150,7 @@ class FeaturesController extends Controller
      */
     public function destroy($id)
     {
-        Feature::find($id)->delete();
+        Testimonial::find($id)->delete();
         return redirect()->back();
     }
 }

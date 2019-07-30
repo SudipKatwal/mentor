@@ -33,19 +33,19 @@
         </div>
         <div class="feature-info">
           @foreach($college->features as $key=>$feature)
-          @if($feature->type==='feature')
-          <div class="fea">
-            <div class="col-md-4">
-              <div class="heading pull-right">
-                <h4>{{$feature->name}}</h4>
-                <p>{!! $feature->descriptions !!}</p>
-              </div>
-              <div class="fea-img pull-left">
-                <i class="fa fa-css3"></i>
+            @if($feature->type==='feature')
+            <div class="fea">
+              <div class="col-md-4">
+                <div class="heading pull-right">
+                  <h4>{{$feature->name}}</h4>
+                  <p>{!! empty($feature->descriptions) ? '' : $feature->descriptions !!}</p>
+                </div>
+                <div class="fea-img pull-left">
+                  <i class="fa fa-css3"></i>
+                </div>
               </div>
             </div>
-          </div>
-          @endif
+            @endif
           @endforeach
         </div>
       </div>
@@ -56,48 +56,48 @@
   <section id="organisations" class="section-padding">
     <div class="container">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12 text-center">
           <div class="detail-info">
             <hgroup>
               <h3 class="det-txt"> About {{$college->name}}</h3>
             </hgroup>
-            <p class="det-p">{!! $college->about->descriptions !!}.</p>
+            <p class="det-p">{!! empty($college->about->descriptions) ? '' : $college->about->descriptions !!}.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
   <!--/ Organisations-->
-  <!--work-shop-->
-  <section id="courses" class="section-padding">
+  <!--Course-->
+  <section id="feature" class="section-padding">
     <div class="container">
       <div class="row">
         <div class="header-section text-center">
-          <h2>Courses</h2>
+          <h2>Course</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem nesciunt vitae,<br> maiores, magni dolorum aliquam.</p>
           <hr class="bottom-line">
         </div>
-        @foreach($college->features as $key=>$feature)
-          @if($feature->type==='course')
-          <div class="col-md-4 col-sm-6">
+        <div class="feature-info">
+          @foreach($college->features as $key=>$feature)
+            @if($feature->type==='course')
             <div class="fea">
               <div class="col-md-4">
                 <div class="heading pull-right">
                   <h4>{{$feature->name}}</h4>
-                  <p>{!! $feature->descriptions !!}</p>
+                  <p>{!! empty($feature->descriptions) ? '' : $feature->descriptions !!}</p>
                 </div>
                 <div class="fea-img pull-left">
                   <i class="fa fa-css3"></i>
                 </div>
               </div>
             </div>
-          </div>
-          @endif
-        @endforeach
+            @endif
+          @endforeach
+        </div>
       </div>
     </div>
   </section>
-  <!--/ work-shop-->
+  <!--/ course-->
   <!--Faculity member-->
   <section id="faculity-member" class="section-padding">
     <div class="container">
@@ -165,18 +165,14 @@
           <p class="white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem nesciunt vitae,<br> maiores, magni dolorum aliquam.</p>
           <hr class="bottom-line bg-white">
         </div>
+          @foreach($college->testimonials as $key=>$testimonial)
         <div class="col-md-6 col-sm-6">
           <div class="text-comment">
-            <p class="text-par">"Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, nec sagittis sem"</p>
-            <p class="text-name">Abraham Doe - Creative Dırector</p>
+            <p class="text-par">{!! $testimonial->descriptions !!}</p>
+            <p class="text-name">{{$testimonial->name}}</p>
           </div>
         </div>
-        <div class="col-md-6 col-sm-6">
-          <div class="text-comment">
-            <p class="text-par">"Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, nec sagittis sem"</p>
-            <p class="text-name">Abraham Doe - Creative Dırector</p>
-          </div>
-        </div>
+        @endforeach
       </div>
     </div>
   </section>

@@ -11,7 +11,7 @@ class FrontController extends Controller
     public function index(){
         return view('front.pages.index.index',
             [
-                'colleges'  => User::all(),
+                'colleges'  => User::where('type','!=','admin')->get(),
             ]
         );
     }

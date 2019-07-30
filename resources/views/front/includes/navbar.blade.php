@@ -12,10 +12,10 @@
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#feature">Features</a></li>
+          <!-- <li><a href="#feature">Features</a></li>
           <li><a href="#organisations">About</a></li>
           <li><a href="#courses">Courses</a></li>
-          <li><a href="#testimonial">Testimonial</a></li>
+          <li><a href="#testimonial">Testimonial</a></li> -->
           @guest
             <li><a href="{{route('login')}}">Sign in</a></li>
             <li><a href="{{route('register')}}">Register</a></li>
@@ -28,6 +28,8 @@
                     <li><a href="{{route('features.index')}}">Feature Management</a></li>
                     <li><a href="{{route('about.index')}}">About Management</a></li>
                     <li><a href="{{route('courses.index')}}">Courses Management</a></li>
+                    <li><a href="{{route('testimonials.index')}}">Testimonial Management</a></li>
+                    <li><a href="{{route('logout')}}">Logout</a></li>
                 </ul>
           </li>
           @endauth

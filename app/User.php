@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\About;
 use App\Feature;
+use App\Testimonial;
 
 class User extends Authenticatable
 {
@@ -47,5 +48,10 @@ class User extends Authenticatable
     public function features()
     {
         return $this->hasMany(Feature::class,'user_id');
+    }
+
+    public function testimonials()
+    {
+        return $this->hasMany(Testimonial::class,'user_id');
     }
 }

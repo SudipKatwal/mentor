@@ -12,7 +12,6 @@
             <div class="intro-para text-center quote">
               <p class="big-text">Learning Today . . . Leading Tomorrow.</p>
               <p class="small-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium enim repellat sapiente quos architecto<br>Laudantium enim repellat sapiente quos architecto</p>
-              <a href="#footer" class="btn get-quote">GET A QUOTE</a>
             </div>
             <a href="#feature" class="mouse-hover">
               <div class="mouse"></div>
@@ -34,19 +33,19 @@
         </div>
         <div class="feature-info">
           @if(count($colleges)>0)
-          @foreach($colleges as $key=>$college)
-          <div class="fea">
-            <div class="col-md-4">
-              <div class="heading pull-right">
-                <h4><a href="{{route('profile',$college->id)}}">{{$college->name}}</a></h4>
-                <p>{!! $college->about->descriptions !!}</p>
-              </div>
-              <div class="fea-img pull-left">
-                <i class="fa fa-css3"></i>
+            @foreach($colleges as $key=>$college)
+            <div class="fea">
+              <div class="col-md-4">
+                <div class="heading pull-right">
+                  <h4><a href="{{route('profile',$college->id)}}">{{$college->name}}</a></h4>
+                  <p>{!! empty($college->about->descriptions) ? '' : $college->about->descriptions !!}</p>
+                </div>
+                <div class="fea-img pull-left">
+                  <i class="fa fa-css3"></i>
+                </div>
               </div>
             </div>
-          </div>
-          @endforeach
+            @endforeach
           @endif
         </div>
       </div>

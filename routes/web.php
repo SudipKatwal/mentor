@@ -24,6 +24,9 @@ Route::group(
         Route::post('feature-data','FeaturesController@featuresData')->middleware('auth')->name('features.data');
         Route::resource('about','AboutController')->middleware('auth');
         Route::resource('courses','FeaturesController')->middleware('auth');
+        Route::resource('testimonials','TestimonialsController')->middleware('auth');
+        Route::post('testimonials-data','TestimonialsController@testimonialsData')->middleware('auth')->name('testimonials.data');
     }
 );
 Auth::routes();
+Route::get('logout','Auth\LoginController@logout')->name('logout');
